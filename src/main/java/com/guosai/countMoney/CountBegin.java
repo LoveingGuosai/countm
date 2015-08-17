@@ -5,6 +5,7 @@ package com.guosai.countMoney;
  */
 public class CountBegin {
     public  static  void main(String[] args){
-
+        ChoseeJFrame choseeJFrame = new ChoseeJFrame();
+        choseeJFrame.init();
     }
 }
