@@ -80,11 +80,11 @@ public class ButtonDemo implements ActionListener {
      * event-dispatching thread.
      */
     private static void createAndShowGUI() {
-        //Set the look and feel.---ÉèÖÃÍâ¹Û£¬¿ÉÒÔºöÂÔ
+        //Set the look and feel.---è®¾ç½®å¤–è§‚ï¼Œå¯ä»¥å¿½ç•¥
         initLookAndFeel();
 
         //Make sure we have nice window decorations.
-        //ÉèÖÃÎªfalseµÄ»°£¬¼´Îª²»¸Ä±äÍâ¹Û
+        //è®¾ç½®ä¸ºfalseçš„è¯ï¼Œå³ä¸ºä¸æ”¹å˜å¤–è§‚
         JFrame.setDefaultLookAndFeelDecorated(true);
 
         //Create and set up the window.

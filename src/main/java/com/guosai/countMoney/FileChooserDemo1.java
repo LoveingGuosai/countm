@@ -11,7 +11,7 @@ import java.io.*;
 /**
  * Created by qiyang on 2015/8/18.
  */
-class FileChooserDemo1 implements ActionListener {
+public class FileChooserDemo1 implements ActionListener {
     JFrame f = null;
     JLabel label = null;
     JTextArea textarea = null;
@@ -25,16 +25,16 @@ class FileChooserDemo1 implements ActionListener {
 //        scrollPane.setPreferredSize(new Dimension(350, 300));
 
         JPanel panel = new JPanel();
-        JButton b1 = new JButton("ĞÂ½¨ÎÄ¼ş");
+        JButton b1 = new JButton("æ–°å»ºæ–‡ä»¶");
         b1.addActionListener(this);
-        JButton b2 = new JButton("´æ´¢ÎÄ¼ş");
+        JButton b2 = new JButton("å­˜å‚¨æ–‡ä»¶");
         b2.addActionListener(this);
         panel.add(b1);
         panel.add(b2);
 
         label = new JLabel(" ", JLabel.CENTER);
 
-        fileChooser = new JFileChooser("D:\\");// ½¨Á¢Ò»¸öFileChooser¶ÔÏó,²¢Ö¸¶¨D:µÄÄ¿Â¼ÎªÄ¬ÈÏÎÄ¼ş¶Ô»°¿òÂ·¾¶.
+        fileChooser = new JFileChooser("D:\\");// å»ºç«‹ä¸€ä¸ªFileChooserå¯¹è±¡,å¹¶æŒ‡å®šD:çš„ç›®å½•ä¸ºé»˜è®¤æ–‡ä»¶å¯¹è¯æ¡†è·¯å¾„.
 
         contentPane.add(label, BorderLayout.NORTH);
 //        contentPane.add(scrollPane, BorderLayout.CENTER);
@@ -58,34 +58,34 @@ class FileChooserDemo1 implements ActionListener {
         File file = null;
         int result;
 		/*
-		 * µ±ÓÃ»§°´ÏÂ"´ò¿ªÎÄ¼ş"°´Å¥Ê±,JFileChooserµÄshowOpenDialog()·½·¨»áÊä³öÎÄ¼ş¶Ô»°¿ò,²¢ÀûÓÃ
+		 * å½“ç”¨æˆ·æŒ‰ä¸‹"æ‰“å¼€æ–‡ä»¶"æŒ‰é’®æ—¶,JFileChooserçš„showOpenDialog()æ–¹æ³•ä¼šè¾“å‡ºæ–‡ä»¶å¯¹è¯æ¡†,å¹¶åˆ©ç”¨
 		 * setApproveButtonText
-		 * ()·½·¨È¡´ú°´Å¥ÉÏ"Open"ÎÄ×Ö;ÒÔsetDialogTitle()·½·¨ÉèÖÃ´ò¿ªÎÄ¼ş¶Ô»°¿òTitleÃû³Æ.
-		 * µ±Ê¹ÓÃÑ¡ÔñÍêºó,»á½«Ñ¡Ôñ½á¹û´æµ½result±äÁ¿ÖĞ.
+		 * ()æ–¹æ³•å–ä»£æŒ‰é’®ä¸Š"Open"æ–‡å­—;ä»¥setDialogTitle()æ–¹æ³•è®¾ç½®æ‰“å¼€æ–‡ä»¶å¯¹è¯æ¡†Titleåç§°.
+		 * å½“ä½¿ç”¨é€‰æ‹©å®Œå,ä¼šå°†é€‰æ‹©ç»“æœå­˜åˆ°resultå˜é‡ä¸­.
 		 */
-        if (e.getActionCommand().equals("ĞÂ½¨ÎÄ¼ş")) {
-            fileChooser.setApproveButtonText("È·¶¨");
-            fileChooser.setDialogTitle("´ò¿ªÎÄ¼ş");
+        if (e.getActionCommand().equals("æ–°å»ºæ–‡ä»¶")) {
+            fileChooser.setApproveButtonText("ç¡®å®š");
+            fileChooser.setDialogTitle("æ‰“å¼€æ–‡ä»¶");
             result = fileChooser.showOpenDialog(f);
 
             textarea.setText("");
 
 			/*
-			 * µ±ÓÃ»§°´ÏÂ´ò¿ªÎÄ¼ş¶Ô»°¿òµÄ"È·¶¨"Å¥ºó,ÎÒÃÇ¾Í¿ÉÒÔÀûÓÃgetSelectedFile()·½·¨È¡µÃÎÄ¼ş¶ÔÏó.ÈôÊÇÓÃ»§°´ÏÂ´ò
-			 * ¿ªÎÄ¼ş¶Ô»°¿òµÄ"Cancel"Å¥,Ôò½«ÔÚlabelÉÏÏÔÊ¾"ÄãÃ»ÓĞÑ¡ÔñÈÎºÎÎÄ¼ş"×ÖÑù.
+			 * å½“ç”¨æˆ·æŒ‰ä¸‹æ‰“å¼€æ–‡ä»¶å¯¹è¯æ¡†çš„"ç¡®å®š"é’®å,æˆ‘ä»¬å°±å¯ä»¥åˆ©ç”¨getSelectedFile()æ–¹æ³•å–å¾—æ–‡ä»¶å¯¹è±¡.è‹¥æ˜¯ç”¨æˆ·æŒ‰ä¸‹æ‰“
+			 * å¼€æ–‡ä»¶å¯¹è¯æ¡†çš„"Cancel"é’®,åˆ™å°†åœ¨labelä¸Šæ˜¾ç¤º"ä½ æ²¡æœ‰é€‰æ‹©ä»»ä½•æ–‡ä»¶"å­—æ ·.
 			 */
             if (result == JFileChooser.APPROVE_OPTION) {
                 file = fileChooser.getSelectedFile();
-                label.setText("ÄúÑ¡Ôñ´ò¿ªµÄÎÄ¼şÃû³ÆÎª£º" + file.getName());
+                label.setText("æ‚¨é€‰æ‹©æ‰“å¼€çš„æ–‡ä»¶åç§°ä¸ºï¼š" + file.getName());
             } else if (result == JFileChooser.CANCEL_OPTION) {
-                label.setText("ÄúÃ»ÓĞÑ¡ÔñÈÎºÎÎÄ¼ş");
+                label.setText("æ‚¨æ²¡æœ‰é€‰æ‹©ä»»ä½•æ–‡ä»¶");
             }
 
             FileInputStream fileInStream = null;
 
             if (file != null) {
                 try {
-                    // ÀûÓÃFileInputStream½«ÎÄ¼şÄÚÈİ·ÅÈë´ËÊı¾İÁ÷ÖĞÒÔ±ã¶ÁÈ¡.
+                    // åˆ©ç”¨FileInputStreamå°†æ–‡ä»¶å†…å®¹æ”¾å…¥æ­¤æ•°æ®æµä¸­ä»¥ä¾¿è¯»å–.
                     fileInStream = new FileInputStream(file);
                 } catch (FileNotFoundException fe) {
                     label.setText("File Not Found");
@@ -95,14 +95,14 @@ class FileChooserDemo1 implements ActionListener {
                 int readbyte;
 
                 try {
-                    // ÒÔread()·½·¨¶ÁÈ¡FileInputStream¶ÔÏóÄÚÈİ,µ±·µ»ØÖµÎª-1Ê±´ú±í¶ÁÍê´ËÊı¾İÁ÷.½«Ëù¶Áµ½µÄ×Ö·ûÏÔÊ¾
-                    // ÔÚtextareaÖĞ.
+                    // ä»¥read()æ–¹æ³•è¯»å–FileInputStreamå¯¹è±¡å†…å®¹,å½“è¿”å›å€¼ä¸º-1æ—¶ä»£è¡¨è¯»å®Œæ­¤æ•°æ®æµ.å°†æ‰€è¯»åˆ°çš„å­—ç¬¦æ˜¾ç¤º
+                    // åœ¨textareaä¸­.
                     while ((readbyte = fileInStream.read()) != -1) {
                         textarea.append(String.valueOf((char) readbyte));
                     }
                 } catch (IOException ioe) {
-                    label.setText("¶ÁÈ¡ÎÄ¼ş´íÎó");
-                } finally {// »ØÊÕFileInputStream¶ÔÏó,±ÜÃâ×ÊÔ´µÄÀË·Ñ.
+                    label.setText("è¯»å–æ–‡ä»¶é”™è¯¯");
+                } finally {// å›æ”¶FileInputStreamå¯¹è±¡,é¿å…èµ„æºçš„æµªè´¹.
                     try {
                         if (fileInStream != null)
                             fileInStream.close();
@@ -111,21 +111,21 @@ class FileChooserDemo1 implements ActionListener {
                 }
             }
         }
-        // Êµ×÷Ğ´ÈëÎÄ¼şµÄ¹¦ÄÜ.
-        if (e.getActionCommand().equals("´æ´¢ÎÄ¼ş")) {
+        // å®ä½œå†™å…¥æ–‡ä»¶çš„åŠŸèƒ½.
+        if (e.getActionCommand().equals("å­˜å‚¨æ–‡ä»¶")) {
             result = fileChooser.showSaveDialog(f);
             file = null;
             String fileName;
-            // µ±ÓÃ»§Ã»ÓĞÑ¡ÔñÎÄ¼ş,¶øÊÇ×Ô¼º¼üÈëÎÄ¼şÃû³ÆÊ±,ÏµÍ³»á×Ô¶¯ÒÔ´ËÎÄ¼şÃû½¨Á¢ĞÂÎÄ¼ş.
+            // å½“ç”¨æˆ·æ²¡æœ‰é€‰æ‹©æ–‡ä»¶,è€Œæ˜¯è‡ªå·±é”®å…¥æ–‡ä»¶åç§°æ—¶,ç³»ç»Ÿä¼šè‡ªåŠ¨ä»¥æ­¤æ–‡ä»¶åå»ºç«‹æ–°æ–‡ä»¶.
             if (result == JFileChooser.APPROVE_OPTION) {
                 file = fileChooser.getSelectedFile();
-                label.setText("ÄúÑ¡Ôñ´æ´¢µÄÎÄ¼şÃû³ÆÎª£º" + file.getName());
+                label.setText("æ‚¨é€‰æ‹©å­˜å‚¨çš„æ–‡ä»¶åç§°ä¸ºï¼š" + file.getName());
             } else if (result == JFileChooser.CANCEL_OPTION) {
-                label.setText("ÄúÃ»ÓĞÑ¡ÔñÈÎºÎÎÄ¼ş");
+                label.setText("æ‚¨æ²¡æœ‰é€‰æ‹©ä»»ä½•æ–‡ä»¶");
             }
-            // Ğ´ÈëÎÄ¼şÎÒÃÇÊ¹ÓÃFileOutputStream,ÔÚÕâ¸ö·¶ÀıÖĞ,ÎÒÃÇĞ´ÈëÎÄ¼şµÄ·½Ê½ÊÇ½«Ö®Ç°ÄÚÈİÇå³ı²¢ÖØĞÂĞ´Èë.ÈôÄãÏë°Ñ
-            // ĞÂÔöµÄÄÚÈİ¼ÓÔÚÔ­ÓĞµÄÎÄ¼şÄÚÈİºóÃæ,Äã¿ÉÒÔÊ¹ÓÃFileOutputStream(String name,Boolean
-            // append)Õâ¸ö¹¹Ôìº¯Êı.
+            // å†™å…¥æ–‡ä»¶æˆ‘ä»¬ä½¿ç”¨FileOutputStream,åœ¨è¿™ä¸ªèŒƒä¾‹ä¸­,æˆ‘ä»¬å†™å…¥æ–‡ä»¶çš„æ–¹å¼æ˜¯å°†ä¹‹å‰å†…å®¹æ¸…é™¤å¹¶é‡æ–°å†™å…¥.è‹¥ä½ æƒ³æŠŠ
+            // æ–°å¢çš„å†…å®¹åŠ åœ¨åŸæœ‰çš„æ–‡ä»¶å†…å®¹åé¢,ä½ å¯ä»¥ä½¿ç”¨FileOutputStream(String name,Boolean
+            // append)è¿™ä¸ªæ„é€ å‡½æ•°.
             FileOutputStream fileOutStream = null;
 
             if (file != null) {
@@ -141,7 +141,7 @@ class FileChooserDemo1 implements ActionListener {
                 try {
                     fileOutStream.write(content.getBytes());
                 } catch (IOException ioe) {
-                    label.setText("Ğ´ÈëÎÄ¼ş´íÎó");
+                    label.setText("å†™å…¥æ–‡ä»¶é”™è¯¯");
                 } finally {
                     try {
                         if (fileOutStream != null)
