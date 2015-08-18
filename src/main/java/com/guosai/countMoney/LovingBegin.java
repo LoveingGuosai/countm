@@ -7,5 +7,7 @@ public class LovingBegin {
     public static void main(String[] args) {
         String file1 = args[0];
         String file2 = args[1];
+        LovingAction lovingAction = new LovingAction();
+        lovingAction.action(file1,file2);
     }
 }
