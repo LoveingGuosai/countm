@@ -93,7 +93,7 @@ public class ButtonDemo implements ActionListener {
 
         ButtonDemo app2 = new ButtonDemo();
         ButtonDemo app1 = new ButtonDemo();
-        JPanel pane = new ChoseeJPanel();
+        JPanel pane = new JPanel();
         pane.add(app1.createComponents());
         pane.add(app2.createComponents());
         pane.setBorder(BorderFactory.createEmptyBorder(

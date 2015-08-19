@@ -1,23 +1,23 @@
-buildscript{
-    repositories{
+buildscript {
+    repositories {
         mavenLocal()
         maven {
             url = "http://maven.oschina.net/content/groups/public"
         }
         mavenCentral()
     }
-    dependencies{
+    dependencies {
         classpath("org.apache.poi:poi-ooxml-schemas:3.12")
- classpath("org.apache.poi:poi-ooxml:3.12")
- classpath("org.apache.poi:poi:3.12")
+        classpath("org.apache.poi:poi-ooxml:3.12")
+        classpath("org.apache.poi:poi:3.12")
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'war'
 
-war{
-    group= 'com.gtan'
+war {
+    group = 'com.gtan'
     baseName = 'singerdreamadminserver'
     version = '0.0.1-SNAPSHOT'
 }
@@ -25,7 +25,7 @@ war{
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-repositories{
+repositories {
     mavenLocal()
     maven {
         url = "http://maven.oschina.net/content/groups/public"
@@ -35,7 +35,7 @@ repositories{
 
 dependencies {
     compile("org.apache.poi:poi-ooxml-schemas:3.12")
-compile("org.apache.poi:poi-ooxml:3.12")
-compile("org.apache.poi:poi:3.12")
+    compile("org.apache.poi:poi-ooxml:3.12")
+    compile("org.apache.poi:poi:3.12")
 }
 

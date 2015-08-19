@@ -20,7 +20,7 @@ public class FileChooserDemo1 implements ActionListener {
     public FileChooserDemo1() {
         f = new ChoseeJFrame();
         Container contentPane = f.getContentPane();
-//        textarea = new JTextArea();
+        textarea = new JTextArea();
 //        JScrollPane scrollPane = new JScrollPane(textarea);
 //        scrollPane.setPreferredSize(new Dimension(350, 300));
 
@@ -33,6 +33,7 @@ public class FileChooserDemo1 implements ActionListener {
         panel.add(b2);
 
         label = new JLabel(" ", JLabel.CENTER);
+        label.setBackground(Color.pink);
 
         fileChooser = new JFileChooser("D:\\");// 建立一个FileChooser对象,并指定D:的目录为默认文件对话框路径.
 
@@ -40,7 +41,7 @@ public class FileChooserDemo1 implements ActionListener {
 //        contentPane.add(scrollPane, BorderLayout.CENTER);
         contentPane.add(panel, BorderLayout.SOUTH);
 
-       // f.pack();
+        f.pack();
         f.setVisible(true);
 
         f.addWindowListener(new WindowAdapter() {

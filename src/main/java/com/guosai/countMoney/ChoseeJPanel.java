@@ -3,6 +3,7 @@ package com.guosai.countMoney;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.net.URL;
 
 /**
@@ -10,15 +11,18 @@ import java.net.URL;
  */
 public class ChoseeJPanel extends JPanel {
     private Image image;
-    public ChoseeJPanel(){
-        this.setSize(400,500);
-        this.setBorder(new EmptyBorder(5,5,5,5));
-    }
+
     @Override
     public void paint(Graphics g) {
+        super.paint(g);
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
         URL url = ChoseeJPanel.class.getResource("/images/background.jpg");
-        ImageIcon imageIcon = new ImageIcon(url);
-        image=imageIcon.getImage();
-        g.drawImage(image,0,0,null);
+      ImageIcon imageIcon = new ImageIcon(url);
+        imageIcon.setImage(imageIcon.getImage().getScaledInstance(getWidth(),getHeight(),Image.SCALE_FAST));
+        imageIcon.paintIcon(this,g,0,0);
     }
 }
