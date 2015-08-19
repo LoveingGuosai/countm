@@ -31,6 +31,7 @@ public class FileChooserDemo1 implements ActionListener {
         b2.addActionListener(this);
         panel.add(b1);
         panel.add(b2);
+        System.out.println(System.getProperty("file.encoding"));
 
         label = new JLabel(" ", JLabel.CENTER);
 

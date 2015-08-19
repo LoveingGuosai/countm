@@ -1,5 +1,6 @@
 package com.guosai.countMoney;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -15,15 +16,9 @@ import java.util.*;
  * Created by qiyang on 15-8-18.
  */
 public class LovingAction {
-    private List<Prepaid> prepaids = new ArrayList<>(10);
     private String date;
-
-    public LovingAction() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        date=simpleDateFormat.format(new Date());
-    }
-
-    public void action(String file1, String file2) {
+    public void action(String file1, String file2,String date) {
+        this.date=date;
         XSSFWorkbook xssfWorkbook_mon;
         XSSFWorkbook xssfWorkbook_all;
         XSSFSheet xssfSheet_mon;
@@ -32,24 +27,29 @@ public class LovingAction {
         try {
             xssfWorkbook_mon = new XSSFWorkbook(file1);
             xssfWorkbook_all = new XSSFWorkbook(file2);
-            System.out.println(xssfWorkbook_mon);
-            System.out.println(xssfWorkbook_all.getSheetName(1));
+            System.out.println("读取Excel到内存中-----");
             xssfSheet_mon = xssfWorkbook_mon.getSheetAt(0);
-            System.out.println(xssfSheet_mon.getSheetName());
+            System.out.println("获取单日Excel sheet1");
             xssfSheet_all = xssfWorkbook_all.getSheetAt(1);
-            parseSheet(xssfSheet_mon);
-            beginAdd(xssfSheet_all);
+            System.out.println("获取汇总Excel sheet2");
+            List<Prepaid> prepaids = new ArrayList<>();
+            parseSheet(xssfSheet_mon,prepaids);
+            beginAdd(xssfSheet_all,prepaids);
             File home_dir = FileSystemView.getFileSystemView().getHomeDirectory();
             String path = home_dir.getAbsolutePath();
-            System.out.println(path+File.separator+"����.xlsx");
-            FileOutputStream fileOutputStream = new FileOutputStream(path+File.separator+"����.xlsx");
+            System.out.println("生成汇合Excel"+path+File.separator+"汇总.xlsx");
+            File file = new File(path+File.separator+"汇总.xlsx");
+            if(file.exists()){
+                file.delete();
+            }
+            FileOutputStream fileOutputStream = new FileOutputStream(path+File.separator+"汇总.xlsx");
             xssfWorkbook_all.write(fileOutputStream);
             fileOutputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public void parseSheet(XSSFSheet xssfSheet){
+    private void parseSheet(XSSFSheet xssfSheet,List<Prepaid> prepaids){
 
         for (int i =1;i<xssfSheet.getLastRowNum();i++){
             try {
@@ -58,14 +58,17 @@ public class LovingAction {
                 continue;
             }
         }
+        if(prepaids.size()==0){
+            throw new IllegalArgumentException("小笨猪，快检查你选择日期，或者单日文件是否正确");
+        }
     }
-    private void beginAdd(XSSFSheet xssfSheet){
+    private void beginAdd(XSSFSheet xssfSheet,List<Prepaid> prepaids){
         int count=1;
         int rowcount=xssfSheet.getLastRowNum();
         for(Prepaid prepaid:prepaids){
             boolean done = false;
             for(int i=1;i<rowcount&&!done;i++){
-                System.out.println(xssfSheet.getRow(i).getCell(0).getStringCellValue()+"-->"+i);
+               // System.out.println(xssfSheet.getRow(i).getCell(0).getStringCellValue()+"-->"+i);
                 if(prepaid.getDev_name().equals(xssfSheet.getRow(i).getCell(0).getStringCellValue())){
                     double money = xssfSheet.getRow(i).getCell(1).getNumericCellValue();
                     xssfSheet.getRow(i).getCell(1).setCellValue(money+prepaid.getPay());

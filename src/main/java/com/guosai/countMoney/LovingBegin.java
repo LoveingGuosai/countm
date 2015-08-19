@@ -8,6 +8,5 @@ public class LovingBegin {
         String file1 = args[0];
         String file2 = args[1];
         LovingAction lovingAction = new LovingAction();
-        lovingAction.action(file1,file2);
     }
 }
