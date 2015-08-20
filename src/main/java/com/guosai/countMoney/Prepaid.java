@@ -17,6 +17,9 @@ public class Prepaid {
     private String role;
 
     public static Prepaid parseFromRow(XSSFRow xssfRow,String date){
+        if(xssfRow.getCell(5).getStringCellValue().equals("系统")){
+            return null;
+        }
         Prepaid prepaid = new Prepaid();
         if(date.equals(xssfRow.getCell(0).getStringCellValue())){
             prepaid.setPayDate(xssfRow.getCell(0).getStringCellValue());
