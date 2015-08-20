@@ -91,8 +91,8 @@ public class ButtonListener implements ActionListener {
         jFileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
         jFileChooser.setApproveButtonText("确定");
         PrintStream printStream = new PrintStream(new AreOutPutStream(textArea));
-        //System.setOut(printStream);
-        //System.setErr(printStream);
+        System.setOut(printStream);
+        System.setErr(printStream);
         // jFrame.pack();
         jFrame.setVisible(true);
 
