@@ -94,9 +94,13 @@ public class LovingAction {
                         if (prepaid.getPay() > 0)
                             xssfCell.setCellFormula(xssfCell.getCellFormula() + "+" + prepaid.getPay());
                         else
-                            xssfCell.setCellFormula(xssfCell.getCellFormula() + "-" + prepaid.getPay());
+                            xssfCell.setCellFormula(xssfCell.getCellFormula()+ prepaid.getPay());
                     }else {
-
+                            xssfCell.setCellType(Cell.CELL_TYPE_FORMULA);
+                        if (prepaid.getPay() > 0)
+                            xssfCell.setCellFormula(money + "+" + prepaid.getPay());
+                        else
+                            xssfCell.setCellFormula(String.valueOf(money) + String.valueOf(prepaid.getPay()));
                     }
                     done = true;
                 }

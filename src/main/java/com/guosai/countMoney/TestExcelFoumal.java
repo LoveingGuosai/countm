@@ -14,8 +14,7 @@ import java.util.Random;
 public class TestExcelFoumal {
     public static  void main(String[] args) throws IOException {
         for (int i = 0; i <100 ; i++) {
-            new Random(0,2).nextInt();
-            System.out.println(new Random(2).nextInt());
+            System.out.println(new Random().nextInt(10));
         }
     }
 }

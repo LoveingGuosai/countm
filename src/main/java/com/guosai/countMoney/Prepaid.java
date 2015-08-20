@@ -16,21 +16,24 @@ public class Prepaid {
     private String payDate;
     private String role;
 
-    public static Prepaid parseFromRow(XSSFRow xssfRow,String date){
-        if(xssfRow.getCell(5).getStringCellValue().equals("系统")){
-            return null;
-        }
-        Prepaid prepaid = new Prepaid();
-        if(date.equals(xssfRow.getCell(0).getStringCellValue())){
+    public static Prepaid parseFromRow(XSSFRow xssfRow, String date) {
+        if (date.equals(xssfRow.getCell(0).getStringCellValue())) {
+            if (xssfRow.getCell(5).getStringCellValue().equals("系统")) {
+                return null;
+            }
+            if (xssfRow.getCell(1).getStringCellValue().trim().equals("开发者") ||
+                    xssfRow.getCell(1).getStringCellValue().trim().equals("个人开发者")) {
+                return null;
+            }
+            if (xssfRow.getCell(2).getStringCellValue() == null || xssfRow.getCell(2).getStringCellValue().equals(""))
+                return null;
+            Prepaid prepaid = new Prepaid();
             prepaid.setPayDate(xssfRow.getCell(0).getStringCellValue());
             prepaid.setRole(xssfRow.getCell(1).getStringCellValue());
             prepaid.setDev_name(xssfRow.getCell(2).getStringCellValue());
             prepaid.setEmail(xssfRow.getCell(3).getStringCellValue());
             prepaid.setPay(Double.valueOf(xssfRow.getCell(4).getStringCellValue()));
             prepaid.setPayWay(xssfRow.getCell(5).getStringCellValue());
-            if(prepaid.getDev_name()==null||prepaid.getDev_name().equals("")){
-                return null;
-            }
             return prepaid;
         }
 
