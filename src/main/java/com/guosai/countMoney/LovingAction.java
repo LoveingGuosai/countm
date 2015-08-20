@@ -1,6 +1,7 @@
 package com.guosai.countMoney;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -88,10 +89,15 @@ public class LovingAction {
                 if (prepaid.getDev_name().equals(xssfSheet.getRow(i).getCell(0).getStringCellValue())) {
                     double money = xssfSheet.getRow(i).getCell(1).getNumericCellValue();
                     XSSFCell xssfCell = xssfSheet.getRow(i).getCell(1);
-                    if (prepaid.getPay() > 0)
-                        xssfCell.setCellFormula(xssfCell.getCellFormula() + "+" + prepaid.getPay());
-                    else
-                        xssfCell.setCellFormula(xssfCell.getCellFormula() + "-" + prepaid.getPay());
+                    //TODO 判断是哪种类型的单元格
+                    if(xssfCell.getCellType()== Cell.CELL_TYPE_FORMULA) {
+                        if (prepaid.getPay() > 0)
+                            xssfCell.setCellFormula(xssfCell.getCellFormula() + "+" + prepaid.getPay());
+                        else
+                            xssfCell.setCellFormula(xssfCell.getCellFormula() + "-" + prepaid.getPay());
+                    }else {
+
+                    }
                     done = true;
                 }
             }
