@@ -22,11 +22,9 @@ public class ChoseeJPanel extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
-        URL url = ChoseeJPanel.class.getResource("/images");
-        File file = new File(url.getFile());
-        File[] images = file.listFiles();
         Random random = new Random();
-        ImageIcon imageIcon = new ImageIcon(images[random.nextInt(images.length)].getAbsolutePath());
+        URL url = ChoseeJPanel.class.getResource("/images/"+random.nextInt(6)+".jpg");
+        ImageIcon imageIcon = new ImageIcon(url);
         imageIcon.setImage(imageIcon.getImage().getScaledInstance(getWidth(),getHeight(),Image.SCALE_FAST));
         imageIcon.paintIcon(this,g,0,0);
     }

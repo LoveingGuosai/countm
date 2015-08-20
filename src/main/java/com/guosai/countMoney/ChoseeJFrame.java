@@ -15,7 +15,7 @@ public class ChoseeJFrame extends JFrame{
         this.setResizable(false);
         this.setSize(550, 800);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        URL url = ChoseeJFrame.class.getResource("/images/background.jpg");
+        URL url = ChoseeJFrame.class.getResource("/images/1.jpg");
         this.setIconImage(new ImageIcon(url).getImage());
     }
 

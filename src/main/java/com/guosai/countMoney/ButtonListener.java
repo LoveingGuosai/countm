@@ -65,7 +65,7 @@ public class ButtonListener implements ActionListener {
         jLabel.setText("输入需要转化的日期（1992-06-10）");
         jLabel.setBounds(20, 50, 300, 30);
         jLabel.setFont(new Font(Font.SANS_SERIF,Font.BOLD,15));
-        jLabel.setForeground(Color.PINK);
+        jLabel.setForeground(Color.black);
         JPanel jPanel = new ChoseeJPanel();
         jPanel.setBackground(Color.pink);
         jPanel.setLayout(null);
@@ -91,8 +91,8 @@ public class ButtonListener implements ActionListener {
         jFileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
         jFileChooser.setApproveButtonText("确定");
         PrintStream printStream = new PrintStream(new AreOutPutStream(textArea));
-        System.setOut(printStream);
-        System.setErr(printStream);
+        //System.setOut(printStream);
+        //System.setErr(printStream);
         // jFrame.pack();
         jFrame.setVisible(true);
 
