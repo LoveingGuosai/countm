@@ -12,7 +12,7 @@ import java.util.Date;
 public class Prepaid {
     private String dev_name;
     private String email;
-    private double pay;
+    private String pay;
     private String payWay;
     private String payDate;
     private String role;
@@ -34,7 +34,7 @@ public class Prepaid {
                 prepaid.setRole(getCellStringValue(xssfRow.getCell(1)));
                 prepaid.setDev_name(getCellStringValue(xssfRow.getCell(2)));
                 prepaid.setEmail(getCellStringValue(xssfRow.getCell(3)));
-                prepaid.setPay(Double.valueOf(getCellStringValue(xssfRow.getCell(4))));
+                prepaid.setPay(formatFormalFromString(getCellStringValue(xssfRow.getCell(4))));
                 prepaid.setPayWay(getCellStringValue(xssfRow.getCell(5)));
                 return prepaid;
             }
@@ -51,6 +51,13 @@ public class Prepaid {
         }else {
             return xssfCell.getStringCellValue();
         }
+    }
+    private static String formatFormalFromString(String pay){
+        double d = Double.valueOf(pay);
+        if(d>=0){
+            return "+"+pay;
+        }
+        return pay;
     }
 
     public Prepaid() {
@@ -72,11 +79,11 @@ public class Prepaid {
         this.email = email;
     }
 
-    public double getPay() {
+    public String getPay() {
         return pay;
     }
 
-    public void setPay(double pay) {
+    public void setPay(String pay) {
         this.pay = pay;
     }
 
