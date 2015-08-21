@@ -1,5 +1,6 @@
 package com.guosai.countMoney;
 
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 
@@ -17,27 +18,39 @@ public class Prepaid {
     private String role;
 
     public static Prepaid parseFromRow(XSSFRow xssfRow, String date) {
-        if (date.equals(xssfRow.getCell(0).getStringCellValue())) {
-            if (xssfRow.getCell(5).getStringCellValue().equals("系统")) {
-                return null;
+        try {
+            if (date.equals(getCellStringValue(xssfRow.getCell(0)))) {
+                if (xssfRow.getCell(5).getStringCellValue().equals("系统")) {
+                    return null;
+                }
+                if (getCellStringValue(xssfRow.getCell(1)).trim().equals("开发者") ||
+                        xssfRow.getCell(1).getStringCellValue().trim().equals("个人开发者")) {
+                    return null;
+                }
+                if (getCellStringValue(xssfRow.getCell(2)) == null || getCellStringValue(xssfRow.getCell(2)).equals(""))
+                    return null;
+                Prepaid prepaid = new Prepaid();
+                prepaid.setPayDate(getCellStringValue(xssfRow.getCell(0)));
+                prepaid.setRole(getCellStringValue(xssfRow.getCell(1)));
+                prepaid.setDev_name(getCellStringValue(xssfRow.getCell(2)));
+                prepaid.setEmail(getCellStringValue(xssfRow.getCell(3)));
+                prepaid.setPay(Double.valueOf(getCellStringValue(xssfRow.getCell(4))));
+                prepaid.setPayWay(getCellStringValue(xssfRow.getCell(5)));
+                return prepaid;
             }
-            if (xssfRow.getCell(1).getStringCellValue().trim().equals("开发者") ||
-                    xssfRow.getCell(1).getStringCellValue().trim().equals("个人开发者")) {
-                return null;
-            }
-            if (xssfRow.getCell(2).getStringCellValue() == null || xssfRow.getCell(2).getStringCellValue().equals(""))
-                return null;
-            Prepaid prepaid = new Prepaid();
-            prepaid.setPayDate(xssfRow.getCell(0).getStringCellValue());
-            prepaid.setRole(xssfRow.getCell(1).getStringCellValue());
-            prepaid.setDev_name(xssfRow.getCell(2).getStringCellValue());
-            prepaid.setEmail(xssfRow.getCell(3).getStringCellValue());
-            prepaid.setPay(Double.valueOf(xssfRow.getCell(4).getStringCellValue()));
-            prepaid.setPayWay(xssfRow.getCell(5).getStringCellValue());
-            return prepaid;
-        }
 
-        return null;
+            return null;
+        }catch (Exception e){
+            System.out.println(xssfRow.getRowNum());
+            return null;
+        }
+    }
+    private static String getCellStringValue(XSSFCell xssfCell){
+        if(xssfCell.getCellType()== Cell.CELL_TYPE_NUMERIC){
+            return String.valueOf(xssfCell.getNumericCellValue());
+        }else {
+            return xssfCell.getStringCellValue();
+        }
     }
 
     public Prepaid() {
