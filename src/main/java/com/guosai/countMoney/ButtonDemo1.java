@@ -8,7 +8,7 @@ import javax.swing.*;
 public class ButtonDemo1 {
     public static void main(String[] args){
         JFrame jFrame = new ChoseeJFrame();
-        jFrame.add(new ChoseeJPanel());
+        jFrame.add(new ChoseeJPanel(1));
         jFrame.setVisible(true);
     }
 }

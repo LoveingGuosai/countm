@@ -14,6 +14,12 @@ import java.util.Random;
  */
 public class ChoseeJPanel extends JPanel {
     private Image image;
+    private int i;
+
+    public ChoseeJPanel(int i) {
+        super();
+        this.i=i;
+    }
 
     @Override
     public void paint(Graphics g) {
@@ -23,8 +29,7 @@ public class ChoseeJPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Random random = new Random();
-        URL url = ChoseeJPanel.class.getResource("/images/" + random.nextInt(6) + ".jpg");
+        URL url = ChoseeJPanel.class.getResource("/images/" + i + ".jpg");
         ImageIcon imageIcon = new ImageIcon(url);
         g.drawImage(imageIcon.getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
       //  imageIcon.setImage(imageIcon.getImage().getScaledInstance(getWidth(),getHeight(),Image.SCALE_FAST));

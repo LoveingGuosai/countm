@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.PrintStream;
+import java.util.Random;
 
 /**
  * Created by qiyang on 15-8-19.
@@ -15,6 +16,7 @@ public class ButtonListener implements ActionListener {
     private JFrame jFrame;
     private File file1;
     private File file2;
+    private File file3=null;
     private JFileChooser jFileChooser;
     private JTextArea textArea;
     private JScrollPane scrollPane;
@@ -66,7 +68,8 @@ public class ButtonListener implements ActionListener {
         jLabel.setBounds(20, 50, 300, 30);
         jLabel.setFont(new Font(Font.SANS_SERIF,Font.BOLD,15));
         jLabel.setForeground(Color.black);
-        JPanel jPanel = new ChoseeJPanel();
+        Random random = new Random();
+        JPanel jPanel = new ChoseeJPanel(random.nextInt(6));
         jPanel.setBackground(Color.pink);
         jPanel.setLayout(null);
         JButton jButton1 = new JButton("选择今日Excel");
@@ -75,15 +78,20 @@ public class ButtonListener implements ActionListener {
         jButton1.addActionListener(this);
         JButton jButton2 = new JButton("选择汇总Excel");
         jButton2.setActionCommand("chose_all");
-        jButton2.setBounds(300, 10, 100, 30);
+        jButton2.setBounds(250, 10, 100, 30);
         jButton2.addActionListener(this);
         JButton jButton3 = new JButton("开始");
         jButton3.setActionCommand("begin");
         jButton3.setBounds(200, 100, 100, 30);
         jButton3.addActionListener(this);
+        JButton jButton4 = new JButton("选择发票Excel");
+        jButton4.setActionCommand("chose_invoice");
+        jButton4.setBounds(400, 10, 100, 30);
+        jButton4.addActionListener(this);
         jPanel.add(jButton1);
         jPanel.add(jButton2);
         jPanel.add(jButton3);
+        jPanel.add(jButton4);
         jPanel.add(textField);
         jPanel.add(scrollPane);
         jPanel.add(jLabel);
@@ -123,15 +131,27 @@ public class ButtonListener implements ActionListener {
             } else {
 
             }
-        } else  if(e.getActionCommand().equals("begin")){
+        }else if(e.getActionCommand().equals("chose_invoice")){
+            jFileChooser.setDialogTitle("打开发票excel");
+            result = jFileChooser.showOpenDialog(jFrame);
+            if (result == jFileChooser.APPROVE_OPTION) {
+                file3 = jFileChooser.getSelectedFile();
+                System.out.println("小笨猪,你选择发票Excel为"+file3.getName());
+            }
+        }else  if(e.getActionCommand().equals("begin")){
             LovingAction lovingAction = new LovingAction();
-            System.out.println(file1.getAbsolutePath());
-            System.out.println(file2.getName());
-            String date= textField.getText();
-            System.out.println("您选择要合并的日期是："+date);
-            System.out.println("请稍等---------您的大脑正在运算中。。。。。。。。。。BIBIBIBI");
-            lovingAction.action(file1.getAbsolutePath(),file2.getAbsolutePath(),date);
-
+            if(file3!=null){
+                System.out.println("请稍等---------您的大脑正在运算中。。。。。。。。。。BIBIBIBI");
+                SixYearBefore sixYearBefore = new SixYearBefore();
+                sixYearBefore.IBeginLoveYou(file3.getAbsolutePath(),file2.getAbsolutePath());
+            }else {
+                System.out.println(file1.getAbsolutePath());
+                System.out.println(file2.getName());
+                String date = textField.getText();
+                System.out.println("您选择要合并的日期是：" + date);
+                System.out.println("请稍等---------您的大脑正在运算中。。。。。。。。。。BIBIBIBI");
+                lovingAction.action(file1.getAbsolutePath(), file2.getAbsolutePath(), date);
+            }
         }
     }
 }

@@ -42,11 +42,11 @@ public class LovingAction {
             File home_dir = FileSystemView.getFileSystemView().getHomeDirectory();
             String path = home_dir.getAbsolutePath();
             System.out.println("生成汇合Excel" + path + File.separator+"desktop"+File.separator + "汇总.xlsx");
-            File file = new File(path + File.separator +"汇总.xlsx");
+            File file = new File(path + File.separator +"Desktop"+File.separator +"汇总.xlsx");
             if (file.exists()) {
                 file.delete();
             }
-            FileOutputStream fileOutputStream = new FileOutputStream(path + File.separator + "汇总.xlsx");
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
             xssfWorkbook_all.write(fileOutputStream);
             fileOutputStream.close();
         } catch (IOException e) {
@@ -85,7 +85,7 @@ public class LovingAction {
             boolean done = false;
             for (int i = 1; i <=rowcount && !done; i++) {
                 // System.out.println(xssfSheet.getRow(i).getCell(0).getStringCellValue()+"-->"+i);
-                if (prepaid.getDev_name().equals(xssfSheet.getRow(i).getCell(0).getStringCellValue())) {
+                if (xssfSheet.getRow(i).getCell(0).getStringCellValue().contains(prepaid.getDev_name())) {
                     double money = xssfSheet.getRow(i).getCell(1).getNumericCellValue();
                     XSSFCell xssfCell = xssfSheet.getRow(i).getCell(1);
                     //TODO 判断是哪种类型的单元格
@@ -101,7 +101,9 @@ public class LovingAction {
             if (!done) {
                 XSSFRow xssfrow = xssfSheet.createRow(rowcount + count++);
                 xssfrow.createCell(0).setCellValue(prepaid.getDev_name());
-                xssfrow.createCell(1).setCellValue(prepaid.getPay().substring(1));
+                XSSFCell xssfCell=xssfrow.createCell(1);
+                xssfCell.setCellType(Cell.CELL_TYPE_FORMULA);
+                xssfCell.setCellFormula(prepaid.getPay().substring(1));
             }
         }
     }
