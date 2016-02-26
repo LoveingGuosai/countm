@@ -22,8 +22,8 @@ public class SixYearBefore {
     private List<Invoice> invoices = new ArrayList<>();
 
     public void IBeginLoveYou(String you, String me) {
-        XSSFWorkbook workbook_mon = null;
-        XSSFWorkbook workbook_all = null;
+        XSSFWorkbook workbook_mon;
+        XSSFWorkbook workbook_all;
         try {
             workbook_mon = new XSSFWorkbook(you);
             workbook_all = new XSSFWorkbook(me);
@@ -32,7 +32,7 @@ public class SixYearBefore {
             File home_dir = FileSystemView.getFileSystemView().getHomeDirectory();
             String path = home_dir.getAbsolutePath();
             System.out.println("生成汇合Excel" + path + File.separator+"Desktop"+File.separator + "汇总.xlsx");
-            File file = new File(path + File.separator+"汇总.xlsx");
+            File file = new File( path + File.separator+"Desktop"+File.separator + "汇总.xlsx");
             if (file.exists()) {
                 file.delete();
             }
@@ -98,7 +98,13 @@ public class SixYearBefore {
     }
 
     private void comparerow(Invoice invoice, XSSFRow row, int i, XSSFRow title) {
-        row.getCell(2).setCellFormula("SUM(D" + i + ":" + getExcelColName(title.getLastCellNum() - 1) + i + ")");
+        try {
+            if(row.getCell(2)==null)
+                row.createCell(2);
+            row.getCell(2).setCellFormula("SUM(D" + i + ":" + getExcelColName(title.getLastCellNum() - 1) + i + ")");
+        }catch (Exception e){
+            System.out.println(1111);
+        }
         int month = invoice.getMonth();
         int number = 0;
         for (int y = getweikai(title)-1; y > 4; y--) {

@@ -15,7 +15,7 @@ public class FileUtil {
         String date = new SimpleDateFormat("yyyyMMdd").format(new Date());
         File home_dir = FileSystemView.getFileSystemView().getHomeDirectory();
         String path = home_dir.getAbsolutePath();
-        File file = new File(path + File.separator + date + "发票抬头不一致.txt");
+        File file = new File( path +File.separator + "发票抬头不一致.txt");
         FileWriter fileWriter =null;
         try {
              fileWriter=new FileWriter(file,true);

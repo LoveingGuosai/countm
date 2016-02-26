@@ -85,18 +85,27 @@ public class LovingAction {
             boolean done = false;
             for (int i = 1; i <=rowcount && !done; i++) {
                 // System.out.println(xssfSheet.getRow(i).getCell(0).getStringCellValue()+"-->"+i);
-                if (xssfSheet.getRow(i).getCell(0).getStringCellValue().contains(prepaid.getDev_name())) {
-                    double money = xssfSheet.getRow(i).getCell(1).getNumericCellValue();
-                    XSSFCell xssfCell = xssfSheet.getRow(i).getCell(1);
-                    //TODO 判断是哪种类型的单元格
-                    if(xssfCell.getCellType()== Cell.CELL_TYPE_FORMULA) {
-                            xssfCell.setCellFormula(xssfCell.getCellFormula()+ prepaid.getPay());
-                    }else {
+                    if (xssfSheet.getRow(i)==null){
+                        System.out.println("截至行-->"+i);
+                        break;
+                    }
+                    if(xssfSheet.getRow(i).getCell(0)==null){
+                        System.out.println("第"+i+"行名称为空 请确认");
+                        break;
+                    }
+                    if (xssfSheet.getRow(i).getCell(0).getStringCellValue().contains(prepaid.getDev_name())) {
+                        double money = xssfSheet.getRow(i).getCell(1).getNumericCellValue();
+                        XSSFCell xssfCell = xssfSheet.getRow(i).getCell(1);
+                        //TODO 判断是哪种类型的单元格
+                        if (xssfCell.getCellType() == Cell.CELL_TYPE_FORMULA) {
+                            xssfCell.setCellFormula(xssfCell.getCellFormula() + prepaid.getPay());
+                        } else {
                             xssfCell.setCellType(Cell.CELL_TYPE_FORMULA);
                             xssfCell.setCellFormula(String.valueOf(money) + prepaid.getPay());
+                        }
+                        done = true;
                     }
-                    done = true;
-                }
+
             }
             if (!done) {
                 XSSFRow xssfrow = xssfSheet.createRow(rowcount + count++);
