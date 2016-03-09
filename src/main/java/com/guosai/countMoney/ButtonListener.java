@@ -17,6 +17,7 @@ public class ButtonListener implements ActionListener {
     private File file1;
     private File file2;
     private File file3=null;
+    private File file4= null;
     private JFileChooser jFileChooser;
     private JTextArea textArea;
     private JScrollPane scrollPane;
@@ -80,6 +81,10 @@ public class ButtonListener implements ActionListener {
         jButton2.setActionCommand("chose_all");
         jButton2.setBounds(250, 10, 100, 30);
         jButton2.addActionListener(this);
+        JButton jButton5 = new JButton("选择A表");
+        jButton5.setActionCommand("chose_needinvoice");
+        jButton5.setBounds(100, 100, 100, 30);
+        jButton5.addActionListener(this);
         JButton jButton3 = new JButton("开始");
         jButton3.setActionCommand("begin");
         jButton3.setBounds(200, 100, 100, 30);
@@ -92,6 +97,7 @@ public class ButtonListener implements ActionListener {
         jPanel.add(jButton2);
         jPanel.add(jButton3);
         jPanel.add(jButton4);
+        jPanel.add(jButton5);
         jPanel.add(textField);
         jPanel.add(scrollPane);
         jPanel.add(jLabel);
@@ -127,16 +133,26 @@ public class ButtonListener implements ActionListener {
             result = jFileChooser.showOpenDialog(jFrame);
             if (result == jFileChooser.APPROVE_OPTION) {
                 file2 = jFileChooser.getSelectedFile();
-                System.out.println("小笨猪,你选择汇总Excel为"+file2.getName());
+                System.out.println("小笨猪,你选择AExcel为"+file2.getName());
             } else {
 
             }
-        }else if(e.getActionCommand().equals("chose_invoice")){
+        }else if (e.getActionCommand().equals("chose_needinvoice")) {
+            jFileChooser.setDialogTitle("打开A表");
+            result = jFileChooser.showOpenDialog(jFrame);
+            if (result == jFileChooser.APPROVE_OPTION) {
+                file4 = jFileChooser.getSelectedFile();
+                System.out.println("小笨猪,你选择汇总Excel为"+file4.getName());
+            } else {
+
+            }
+        }
+        else if(e.getActionCommand().equals("chose_invoice")){
             jFileChooser.setDialogTitle("打开发票excel");
             result = jFileChooser.showOpenDialog(jFrame);
             if (result == jFileChooser.APPROVE_OPTION) {
                 file3 = jFileChooser.getSelectedFile();
-                System.out.println("小笨猪,你选择发票Excel为"+file3.getName());
+                System.out.println("小笨猪,你选择发票Excel为" + file3.getName());
             }
         }else  if(e.getActionCommand().equals("begin")){
             LovingAction lovingAction = new LovingAction();
@@ -144,6 +160,10 @@ public class ButtonListener implements ActionListener {
                 System.out.println("请稍等---------您的大脑正在运算中。。。。。。。。。。BIBIBIBI");
                 SixYearBefore sixYearBefore = new SixYearBefore();
                 sixYearBefore.IBeginLoveYou(file3.getAbsolutePath(),file2.getAbsolutePath());
+            }else if(file4!=null){
+                System.out.println("请稍等---------您的大脑正在运算中。。。。。。。。。。BIBIBIBI");
+                NeedInvoicAction needInvoicAction = new NeedInvoicAction();
+                needInvoicAction.action(file2.getAbsolutePath(),file4.getAbsolutePath());
             }else {
                 System.out.println(file1.getAbsolutePath());
                 System.out.println(file2.getName());
